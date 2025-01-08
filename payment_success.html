@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block class %}class="sub_page"{% endblock class %}
+{% block success_status %}active{% endblock success_status %}
+{% block main %}
+<div class="container mt-5">
+    <h2 class="text-center text-success">Payment Successful!</h2>
+    <p>Your payment for Order #{{ order.id }} has been successfully processed.</p>
+    <p><strong>Payment ID:</strong> {{ payment.id }}</p>
+    <p><strong>Amount Paid:</strong> ${{ payment.amount }}</p>
+    <a href="{% url 'Home' %}" class="btn btn-primary">Go Back to Home</a>
+</div>
+{% endblock main %}

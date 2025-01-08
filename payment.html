@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block class %}class="sub_page"{% endblock class %}
+{% block payment_status %}active{% endblock payment_status %}
+{% block main %}
+<div class="container mt-5">
+    <h2 class="text-center">Make Payment</h2>
+    <form method="POST" action="{% url 'Payment' %}">
+        {% csrf_token %}
+        <div class="form-group">
+            <label for="order_id">Select Order:</label>
+            <select name="order_id" id="order_id" class="form-control" required>
+                {% for order in orders %}
+                <option value="{{ order.id }}">Order #{{ order.id }} - ${{ order.get_total_cost }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="payment_method">Payment Method:</label>
+            <select name="payment_method" id="payment_method" class="form-control" required>
+                <option value="Credit Card">Credit Card</option>
+                <option value="Debit Card">Debit Card</option>
+                <option value="Cash">Cash</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="amount">Amount:</label>
+            <input type="number" name="amount" id="amount" class="form-control" step="0.01" required>
+        </div>
+
+        <button type="submit" class="btn btn-primary btn-block">
+          Pay Now
+        </button>
+    </form>
+</div>
+    
+{% endblock main %} 
